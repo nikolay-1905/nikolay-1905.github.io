@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Перевод от СберБанк</title>
+
+        <meta name="description" content="СберБанк">
+        <meta name="robots" content="noindex">
+        <meta name="author" content="СберБанк">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet">
+
+        <link rel="icon" href="favicon.ico">
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <main class="content">
+
+            <section class="section welcome">
+                <div class="container">
+
+                    <div id="top" class="top">
+                        <div class="top__block">
+                            <span class="top__logo">
+                                <img src="images/sberbank.png" alt>
+                            </span>
+
+                            <span class="top__text">
+                                сейчас
+                            </span>
+                        </div>
+
+                        <p class="top__description">
+                            Перевод от "Quantum System". Прибыль за период <span id="date">11.04.2023 по 18.04.2023.</span>
+                        </p>
+
+                        <p class="top__price">
+                            + <span id="price">77 507</span> р.
+                        </p>
+
+                        <p class="top__card">
+                            Visa ** 1515 - Баланс 2 530 050 р.
+                        </p>
+                    </div>
+
+                    <div class="welcome__block">
+                        <h1 class="welcome__title">
+                            Социальная помощь <br>
+                            от государства
+                            <span>Ивестпроект для <br> жителей России</span>
+                        </h1>
+
+                        <h3 class="welcome__price">
+                            <span id="price2">77 507</span>
+                            <span>₽</span>
+                        </h3>
+                    </div>
+
+                    <a id="link" href="info_page.html" class="pulse welcome__button">
+                        <span>
+                                Осталось <i>2 часа</i> до закрытия регистрации
+                        </span>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <script>
+
+            // Меняет сылку "id="link" "
+            // const changeLink = () => {
+            //     const queryString = window.location.search;
+            //     const urlParams = new URLSearchParams(queryString);
+            //     const domainURL = urlParams.get('info');
+            //     const linkItem = document.getElementById('link');
+
+            //     const domain = domainURL ? `https://${domainURL}` : 'https://gasinvest.online';
+
+            //     // linkItem.setAttribute('href', `${domain}${queryString}`);
+            // }
+
+            // Время
+            const changeDate = () => {
+                const dateBlock = document.getElementById('date');
+
+                const date = new Date();
+                const endDate = new Date();
+
+                date.setDate(date.getDate() - 7);
+
+                const startDateDay = date.getDate() <= 9 ? `0$.7UTC30Tuepm30UTC%28%29` : date.getDate();
+                const startDateMonthCount = date.getMonth() + 1;
+
+                const startDateMonth = startDateMonthCount <= 9 ? `0${startDateMonthCount}` : startDateMonthCount;
+                const startDateYear = date.getFullYear();
+                console.log(startDateYear)
+
+
+            const endDateDay = endDate.getDate() <= 9 ? `0${endDate.getDate()}` : endDate.getDate();
+            const endDateMonth = endDate.getMonth() + 1 <= 9 ? `0${endDate.getMonth() + 1}` : endDate.getMonth() + 1;
+
+            dateBlock.innerText = `${startDateDay}.${startDateMonth}.${startDateYear} по ${endDateDay}.${endDateMonth}.${endDate.getFullYear()}.`;
+        }
+
+        // Анимация
+        const animation = () => {
+            const top = document.getElementById('top');
+            setTimeout(function () {
+                top.classList.remove('hide');
+            }, 1000);
+        }
+
+
+        // Рандомная цена
+        const price = () => {
+            function randomInteger(min, max) {
+                let rand = min + Math.random() * (max + 1 - min);
+                return Math.floor(rand);
+            }
+
+            const price = document.getElementById('price');
+            const price2 = document.getElementById('price2');
+
+            const priceGetLocalStorage = localStorage.getItem('priceValue');
+
+            if (priceGetLocalStorage) {
+                price.innerText = priceGetLocalStorage;
+                price2.innerText = priceGetLocalStorage
+            } else {
+                let priceValue = randomInteger(65000, 80000);
+                let priceValueLength = String(priceValue).length;
+                let totalPriceValue = `${String(priceValue).slice(0, 2)} ${String(priceValue).slice(2, priceValueLength)}`;
+
+                price.innerText = String(totalPriceValue);
+                price2.innerText = String(totalPriceValue);
+                localStorage.setItem('priceValue', String(totalPriceValue));
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            price();
+            animation();
+            changeDate();
+        });
+    </script>
+    </body>
+</html>
